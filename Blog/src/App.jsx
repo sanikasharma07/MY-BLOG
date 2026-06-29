@@ -24,12 +24,12 @@ function App() {
   .finally(()=>setLoading(false))
  },[])
 return !loading ? (
-  <div className='min-h-screen flex flex-col bg-gray-400'>
+  <div className='min-h-screen flex flex-col bg-gray-400 overflow-x-hidden'>
     
     <Header />
 
     {/* The flex-grow here is the magic spring that pushes the footer down */}
-    <main className="flex-grow w-full">
+    <main className="grow w-full">
       <Outlet />
     </main>
 

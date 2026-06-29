@@ -52,7 +52,7 @@ function AllPosts() {
             <div className="w-full py-8 mt-4 text-center">
                 <Container>
                     <h1 className="text-2xl font-bold text-black">
-                        You haven't written any posts yet!
+                        You haven't written any posts yet🐾
                     </h1>
                 </Container>
             </div>
@@ -64,11 +64,12 @@ function AllPosts() {
         <Container>
             <div className="flex flex-wrap">
                  {posts.map((post) => (
-                    <div key={post.$id} className="p-2 w-1/4">
+                    <div key={post.$id} className="p-2 w-full sm:w-1/2 lg:w-1/4">
                         <PostCard 
                             $id={post.$id}
                             title={post.title}
                             featuredImage={post.featuredImage}
+                    
                         />
                     </div>
                  ))}
