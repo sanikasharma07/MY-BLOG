@@ -35,32 +35,43 @@ export default function Post() {
     return post ? (
         <div className="py-8">
             <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                {/* Image Wrapper Container */}
+                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2 bg-gray-50">
                     <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
+                        src={appwriteService.getFilePreview(post.featuredImage)} // Swapped to avoid transformation block
                         alt={post.title}
-                        className="rounded-xl"
+                        className="rounded-xl max-h-100 object-contain"
                     />
 
                     {isAuthor && (
-                        <div className="absolute right-6 top-6">
+                        /* Moved from right-6 top-6 to right-2 top-2 for maximum edge positioning */
+                        <div className="absolute right-2 top-2 flex gap-1.5 z-10">
                             <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
+                                {/* Added explicit tight padding and smaller text size */}
+                                <Button 
+                                    bgColor="bg-green-500" 
+                                    className="px-3 py-1 text-xs md:text-sm font-medium shadow-md hover:bg-green-600 transition-colors"
+                                >
                                     Edit
                                 </Button>
                             </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
+                            <Button 
+                                bgColor="bg-red-500" 
+                                onClick={deletePost}
+                                className="px-3 py-1 text-xs md:text-sm font-medium shadow-md hover:bg-red-600 transition-colors"
+                            >
                                 Delete
                             </Button>
                         </div>
                     )}
                 </div>
-                <div className="w-full mb-6">
-                    <h1 className="text-2xl font-bold">{post.title}</h1>
+                
+                <div className="w-full mb-6 text-center">
+                    <h1 className="text-3xl font-extrabold">{post.title}</h1>
                 </div>
-                <div className="browser-css">
+                <div className="browser-css w-full max-w-4xl mx-auto px-4 text-lg leading-relaxed">
                     {parse(post.content)}
-                    </div>
+                </div>
             </Container>
         </div>
     ) : null;

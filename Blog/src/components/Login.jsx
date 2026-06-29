@@ -78,7 +78,8 @@ function Login(){
                 )} />
                 <button
                 type="submit"
-                className="w-full"
+                className="w-full hover:bg-blue-500"
+
                 >Sign in</button>
             </div>
         </form>

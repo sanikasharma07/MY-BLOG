@@ -23,18 +23,20 @@ function App() {
   })
   .finally(()=>setLoading(false))
  },[])
-return !loading?(
-  <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
-    <div className='w-full block'>
-      <Header/>
+return !loading ? (
+  <div className='min-h-screen flex flex-col bg-gray-400'>
+    
+    <Header />
 
-      <main>
-      <Outlet/>
-      </main>
-      <Footer/>
-    </div>
+    {/* The flex-grow here is the magic spring that pushes the footer down */}
+    <main className="flex-grow w-full">
+      <Outlet />
+    </main>
+
+    <Footer />
+    
   </div>
-):null
+) : null
 }
 
 export default App
