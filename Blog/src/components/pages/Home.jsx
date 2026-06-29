@@ -32,7 +32,6 @@ if(posts.length===0){
                 <div className='flex flex-wrap'>
                    {posts.map((post) => (
     <div key={post.$id} className='p-2 w-1/4'>
-        {/* Pass the properties explicitly if the spread is acting up */}
         <PostCard 
             $id={post.$id} 
             title={post.title} 

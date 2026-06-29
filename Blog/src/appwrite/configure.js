@@ -1,9 +1,8 @@
 import config from "../conf/config";
-import { Client, TablesDB, ID, Storage, Query } from "appwrite";
+import { Client, TablesDB, ID, Storage, Query, Permission, Role } from "appwrite";
 
 export class Service {
     client = new Client();
-    // Keeping your variables exactly as they should be!
     tablesdb;
     bucket;
 
@@ -18,7 +17,6 @@ export class Service {
 
     async createPost({ title, slug, content, featuredImage, status, userId }) {
         try {
-            // FIXED TYPO: Changed this.tablesDB to this.tablesdb (case-sensitive!)
             return await this.tablesdb.createRow(
                 config.appwriteDatabaseId,
                 config.appwriteTableId,
@@ -29,7 +27,6 @@ export class Service {
                     featuredImage,
                     status,
                     userId,
-                    
                 }
             );
         } catch (error) {
@@ -39,7 +36,6 @@ export class Service {
 
     async updatePost(slug, { title, content, featuredImage, status }) {
         try {
-            // FIXED TYPO: tablesDB -> tablesdb AND congif -> config
             return await this.tablesdb.updateRow(
                 config.appwriteDatabaseId,
                 config.appwriteTableId,
@@ -58,7 +54,6 @@ export class Service {
 
     async deletePost(slug) {
         try {
-            // FIXED TYPO: tablesDB -> tablesdb
             await this.tablesdb.deleteRow(
                 config.appwriteDatabaseId,
                 config.appwriteTableId,
@@ -83,7 +78,6 @@ export class Service {
         }
     }
 
-    // FIXED TYPO: Added quotes around 'active' so JavaScript knows it's a string!
     async allPost(queries = [Query.equal('status', 'active')]) {
         try {
             return await this.tablesdb.listRows(
@@ -97,14 +91,16 @@ export class Service {
         }
     }
 
-    // file upload
+    // file upload — now sets public read permission so getFilePreview URLs work in <img> tags
     async uploadFile(file) {
         try {
             return await this.bucket.createFile(
                 config.appwriteBucketId,
-                // FIXED TYPO: Added parentheses () because unique is a function!
                 ID.unique(),
-                file
+                file,
+                [
+                    Permission.read(Role.any()),
+                ]
             );
         } catch (error) {
             console.log("Appwrite service :: uploadFile :: error", error);
