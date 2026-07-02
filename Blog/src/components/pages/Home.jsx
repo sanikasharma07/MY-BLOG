@@ -42,7 +42,7 @@ function Home(){
     // SCENARIO 2: Fetch is done, but user is logged out.
     if (authstatus === false) {
  return (
-        <div className="w-full py-16 bg-amber-50"> {/* Added a warm, earthy background */}
+        <div className="w-full min-h-[80vh] items-center py-16 bg-amber-50"> {/* Added a warm, earthy background */}
             <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
                 
                 {/* Left Side: The Hook */}
